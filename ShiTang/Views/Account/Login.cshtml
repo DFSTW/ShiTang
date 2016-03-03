@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+@model ShiTang.Models.LoginModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="renderer" content="webkit">
+    <title>食堂消费查询</title>
+
+    <link href="~/Content/Site1.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Site2.css" type="text/css" rel="stylesheet" />
+
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="p-body6 ">
+    <div class="g-bdfull2">
+        <div class="m-logbg">
+            <img id="bg" src="~/Images/6608854332282905023.jpg" style="width: 1899px; height: auto; margin-left: 0px; margin-top: -162.81625px; visibility: visible; opacity: 1;">
+            <span class="bgshadow"></span>
+        </div>
+        <div class="m-logbg m-logbg2">
+            <img id="bg2" src="~/Images/6608854332282905023.jpg" style="visibility: hidden; opacity: 1; height: auto; width: 1899px; margin-top: -293.711607142857px; margin-left: 0px;">
+            <span class="bgshadow"></span>
+        </div>
+        <div class="g-bdc">
+            <div class="m-stwrap1" id="stwrap" style="visibility: visible; opacity: 1;">
+
+
+
+                <div class="m-region">
+                    <div class="logo">
+                        <h1 class="f2" style="color: #DED; font-size: 32px;">食堂消费记录查询</h1>
+                    </div>
+                    <div class="m-userlnks f-cb">
+                    </div>
+
+                    <div class="m-forms">
+
+                        <div id="newlogin" class="m-login">
+                            <div class="cont f-cb ztag">
+
+
+                                <div class="contl">
+                                    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+@*<form class="ztag" method="post" action="https://reg.163.com/logins.jsp">*@
+                                        <ul class="w-user w-user-2">
+                                            <li class="w0">
+                                                <div class="inpt ztag">
+                                                    @* <label>胸卡号</label>*@
+                                                    @Html.TextBoxFor(m => m.UserName, new { @class = "txt", placeholder = Html.DisplayNameFor(n => n.UserName) })
+                                                </div>
+                                            </li>
+                                            <li class="w0">
+                                                <div class="inpt">
+                                                    @Html.PasswordFor(m => m.Password, new { @class = "txt ztag", placeholder = Html.DisplayNameFor(n => n.Password) })
+                                                </div>
+                                            </li>
+                                            <li class="w0 w2">
+                                                <input id="loginsubmit" tabindex="4" type="submit" class="w-btn w-btn-0 ztag" value="登录查询" />
+                                            </li>
+                                            <li class="w0 w3 f-cb">
+                                                <a class="fgt" href="http://172.18.50.90:8888/jfids/index.xhtml?cid=73570" target="_blank">找回帐号</a>
+                                                <span class="fgt" style="margin: 0 10px;">|</span>
+                                                <a class="fgt" href="http://172.18.50.90:8888/jfids/index.xhtml?cid=73570" target="_blank">忘记密码</a>
+                                            </li>
+                                        </ul>
+                                        <input name="type" type="hidden" value="1">
+                                        <input name="url" type="hidden" value="">
+                                        <input name="product" type="hidden" value="lofter">
+                                        <input name="savelogin" type="hidden" value="1">
+                                        <input name="username" type="hidden" value="">
+                                        <input name="domains" type="hidden" value="www.lofter.com">
+                                       
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="g-ft1" id="ft1" style="visibility: visible; opacity: 1;">
+            <div class="m-logbm">
+                <div class="logbm2" id="systemLogin">
+                    <a class="itm opa by opentag" title="To"><span>信息中心版权所有　©2015</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+</body>
+</html>
