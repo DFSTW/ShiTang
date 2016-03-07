@@ -22,11 +22,11 @@
             <input id="name" type="text" value="@ViewBag.Name" />
         </div>
         <h5>本月下发余额：@ViewBag.Remains </h5>
-        @{DateTime startTime = new DateTime(2015, 12, 01); }
-        @for (int i = 0; startTime <= DateTime.Now; i++)
+        @{DateTime startTime = DateTime.Now; }
+        @for (int i = 0; i < 6 && startTime >= new DateTime(2015, 12, 01); i++)
         {
             <input type="button" class="submit" value="@startTime.ToString("yyyyMM")"  />
-            startTime = startTime.AddMonths(1);
+            startTime = startTime.AddMonths(-1);
         }
         <table>
             <thead>
