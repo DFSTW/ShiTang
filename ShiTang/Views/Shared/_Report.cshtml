@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="renderer" content="webkit">
+    <title>食堂消费查询</title>
+    <link href="~/Content/milligram.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/menu.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div class="menu">
+        <ul>
+            <li>@Html.ActionLink("主页", "Index", "Home")</li>
+            <li>@Html.ActionLink("个人消费查询", "Index", "Admin")</li>
+            <li><a href="#">公司消费报表</a>
+                <ul>
+                    <li>@Html.ActionLink("东汽月消费报表", "Index", "MReport")</li>
+                    <li>@Html.ActionLink("东汽实业月消费报表", "SY", "MReport")</li>
+                    <li>@Html.ActionLink("西科月消费报表", "XK", "MReport")</li>
+                </ul>
+            </li>
+            <li><a href="#">食堂消费报表</a>
+                <ul>
+                    <li>@Html.ActionLink("八角一食堂消费报表", "BY", "MReport")</li>
+                    <li>@Html.ActionLink("八角二食堂度消费报表", "BE", "MReport")</li>
+                    <li>@Html.ActionLink("八角三食堂消费报表", "BS", "MReport")</li>
+                    <li>@Html.ActionLink("八角配餐中心消费报表", "BP", "MReport")</li>
+                    <li>@Html.ActionLink("二分厂食堂消费报表", "EF", "MReport")</li>
+                    <li>@Html.ActionLink("风电食堂消费报表", "FD", "MReport")</li>
+                    <li>@Html.ActionLink("辅机食堂度消费报表", "FJ", "MReport")</li>
+                    <li>@Html.ActionLink("河东食堂消费报表", "HD", "MReport")</li>
+                    <li>@Html.ActionLink("绵竹食堂消费报表", "MZ", "MReport")</li>
+                    <li>@Html.ActionLink("运业食堂消费报表", "YY", "MReport")</li>
+
+                </ul>
+            </li>
+            <li>@Html.ActionLink("刷卡机消费报表", "PM", "MReport")
+            </li>
+            <div class="clr"></div>
+        </ul>
+    </div>
+    <div class="container">
+        @RenderSection("title", false)
+        @{DateTime startTime = DateTime.Now; }
+        @for (int i = 0; i < 6 && startTime >= new DateTime(2015, 12, 01); i++)
+        {
+            <input class="submit" type="button" value="@startTime.ToString("yyyyMM")" />
+            startTime = startTime.AddMonths(-1);
+        }
+        <table id="report">
+            <col />
+            <colgroup span="3"></colgroup>
+            <colgroup span="3"></colgroup>
+            <colgroup span="3"></colgroup>
+            <colgroup span="3"></colgroup>
+            <colgroup span="3"></colgroup>
+            <col />
+            <col />
+            <tr>
+                <th rowspan="2">部门</th>
+                <th colspan="3" scope="colgroup">东汽</th>
+                <th colspan="3" scope="colgroup">东运公司</th>
+                <th colspan="3" scope="colgroup">万胜公司</th>
+                <th colspan="3" scope="colgroup">天运公司</th>
+                <th colspan="3" scope="colgroup">群力公司</th>
+                <th rowspan="2">临时卡</th>
+                <th rowspan="2">小计</th>
+            </tr>
+            <tr>
+                <th scope="col">正常</th>
+                <th scope="col">加班</th>
+                <th scope="col">夜班</th>
+                <th scope="col">正常</th>
+                <th scope="col">加班</th>
+                <th scope="col">夜班</th>
+                <th scope="col">正常</th>
+                <th scope="col">加班</th>
+                <th scope="col">夜班</th>
+                <th scope="col">正常</th>
+                <th scope="col">加班</th>
+                <th scope="col">夜班</th>
+                <th scope="col">正常</th>
+                <th scope="col">加班</th>
+                <th scope="col">夜班</th>
+            </tr>
+
+        </table>
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()" style="color: blue">注销退出</a>
+        }
+        <div>
+            <a><span>信息中心软件组版权所有　©@DateTime.Now.Year</span></a>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.menu ul ul').hide();
+
+            $('.menu ul li').hover(function () {
+                $(this)
+                  .find('ul')
+                  .stop(true, true)
+                  .slideDown('fast');
+
+            }, function () {
+                $(this)
+                  .find('ul')
+                  .stop(true, true)
+                  .fadeOut('fast');
+            });
+            $('.submit').click(function () {
+                $('.added').remove();
+                $.ajax({
+                    url: "@ViewBag.Url" + $(this).val() + "@ViewBag.Param",
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (da) {
+                        da.forEach(function (data) {
+                            $('#report').append("<tr class='added'><th scope=\"row\">" + data.DepartName + "</td><td>"
+                                + data.DQ1 + "</td><td>" + data.DQ2 + "</td><td>" + data.DQ3 +
+                                "</td><td>" + data.DY1 + "</td><td>" + data.DY2 + "</td><td>" + data.DY3 +
+                                "</td><td>" + data.WS1 + "</td><td>" + data.WS2 + "</td><td>" + data.WS3 +
+                                "</td><td>" + data.TY1 + "</td><td>" + data.TY2 + "</td><td>" + data.TY3 +
+                                "</td><td>" + data.QL1 + "</td><td>" + data.QL2 + "</td><td>" + data.QL3 +
+                                "</td><td>" + data.TMP + "</td><td>" + data.Total + "</td></tr>");
+                        });
+                    },
+                    error: function () {
+                        console.log('error');
+                    }
+                });
+            });
+            $.ajax({
+                url: "@ViewBag.Url" + "@ViewBag.Param",
+                type: 'GET',
+                dataType: 'json',
+                success: function (da) {
+                    da.forEach(function (data) {
+                        $('#report').append("<tr class='added'><th scope=\"row\">" + data.DepartName + "</td><td>"
+                            + data.DQ1 + "</td><td>" + data.DQ2 + "</td><td>" + data.DQ3 +
+                            "</td><td>" + data.DY1 + "</td><td>" + data.DY2 + "</td><td>" + data.DY3 +
+                            "</td><td>" + data.WS1 + "</td><td>" + data.WS2 + "</td><td>" + data.WS3 +
+                            "</td><td>" + data.TY1 + "</td><td>" + data.TY2 + "</td><td>" + data.TY3 +
+                            "</td><td>" + data.QL1 + "</td><td>" + data.QL2 + "</td><td>" + data.QL3 +
+                            "</td><td>" + data.TMP + "</td><td>" + data.Total + "</td></tr>");
+                    });
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

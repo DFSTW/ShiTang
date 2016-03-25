@@ -178,6 +178,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MReportController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,6 +192,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\menu.css" />
     <Content Include="Content\milligram.min.css" />
     <Content Include="Content\Site1.css" />
     <Content Include="Content\Site2.css" />
@@ -301,7 +304,12 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admin\Index2.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_Report.cshtml" />
+    <Content Include="Views\MReport\Index.cshtml" />
+    <Content Include="Views\MReport\PM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

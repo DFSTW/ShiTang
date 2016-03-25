@@ -1,78 +1,55 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = "Index";
 }
-@model List<ShiTang.Models.XiaoFeiJiLu>
-@{
-    ViewBag.Title = "欢迎使用";
+<h4>食堂消费记录查询</h4>
+<div>
+    <label>胸卡号</label>
+    <input id="name" type="text" value="@ViewBag.Name" />
+</div>
+<h5>本月下发余额：@ViewBag.Remains </h5>
+@{DateTime startTime = DateTime.Now; }
+@for (int i = 0; i < 6 && startTime >= new DateTime(2015, 12, 01); i++)
+{
+    <input type="button" class="submit" value="@startTime.ToString("yyyyMM")"  />
+    startTime = startTime.AddMonths(-1);
 }
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <meta name="renderer" content="webkit">
-    <title>食堂消费查询</title>
-    <link href="~/Content/milligram.min.css" type="text/css" rel="stylesheet" />
-</head>
-<body>
-    <div class="container">
-        <h4>食堂消费记录查询</h4>
-        <div>
-            <label>胸卡号</label>
-            <input id="name" type="text" value="@ViewBag.Name" />
-        </div>
-        <h5>本月下发余额：@ViewBag.Remains </h5>
-        @{DateTime startTime = DateTime.Now; }
-        @for (int i = 0; i < 6 && startTime >= new DateTime(2015, 12, 01); i++)
+<table>
+    <thead>
+        <tr>
+            <th>刷卡机</th>
+            <th>胸卡号</th>
+            <th>消费卡号</th>
+            <th>消费时间</th>
+            <th>消费金额</th>
+            <th>消费标志</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
         {
-            <input type="button" class="submit" value="@startTime.ToString("yyyyMM")"  />
-            startTime = startTime.AddMonths(-1);
-        }
-        <table>
-            <thead>
-                <tr>
-                    <th>刷卡机</th>
-                    <th>胸卡号</th>
-                    <th>消费卡号</th>
-                    <th>消费时间</th>
-                    <th>消费金额</th>
-                    <th>消费标志</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var p in Model)
-                {
-                    <tr>
-                        <td>@p.dq_ip</td>
-                        <td>@ViewBag.Name</td>
-                        <td>@p.dq_cardid</td>
-                        <td>@p.dq_time</td>
-                        <td>@p.dq_value<span>元</span></td>
-                        <td>@if (p.dq_flag == 0)
-                            { @Html.Raw("消费")}
-                            else
-                            {@Html.Raw("充值")}</td>
-                    </tr>
+            <tr>
+                <td>@p.dq_ip</td>
+                <td>@ViewBag.Name</td>
+                <td>@p.dq_cardid</td>
+                <td>@p.dq_time</td>
+                <td>@p.dq_value<span>元</span></td>
+                <td>@if (p.dq_flag == 0)
+                    { @Html.Raw("消费")}
+                    else
+                    {@Html.Raw("充值")}</td>
+            </tr>
                                                    
-                }
-            </tbody>
-        </table>
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-        {
-            @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()" style="color: blue">注销退出</a>
         }
-        <div>
-            <a><span>信息中心软件组版权所有　©@DateTime.Now.Year</span></a>
-        </div>
-    </div>
-    @Scripts.Render("~/bundles/jquery")
+    </tbody>
+</table>
+@section scripts{
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('.submit').click(function () {
-                window.location.href = "@Url.Content("~")"+ "Admin/Index/" + $(this).val() + "?name=" + $('#name').val();
+                window.location.href = "@Url.Content("~")" + "Admin/Index/" + $(this).val() + "?name=" + $('#name').val();
             });
+
         });
     </script>
-</body>
-</html>
+}

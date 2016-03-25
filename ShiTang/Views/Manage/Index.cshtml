@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h4>食堂消费查询系统</h4>
+        
+       @* <input type="button" id="first" class="submit" value="个人消费记录查询"  />
+        <input type="button" id="second" class="submit" value="消费月度报表"  /><br />*@
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#first').click(function () {
+                window.location.href = "@Url.Content("~")" + "Admin/Index/";
+            });
+            $('#second').click(function () {
+                window.location.href = "@Url.Content("~")" + "MReport/Index/";
+            });
+        });
+    </script>
+}

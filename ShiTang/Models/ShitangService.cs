@@ -45,6 +45,7 @@ and b.dq_empid = @user";
       ,a.[dq_flag]
   FROM [icsystem].[dbo].DQ_CONSUME_RECORDS_"+YearMonth+@" a, dq_r_emp_cards b
 where a.dq_cardid = b.dq_cardid
+and a.dq_flag = 0
 and b.dq_empid = @user order by a.dq_time";
             cmdBOM.Parameters.Add("@user", System.Data.SqlDbType.NVarChar);
             cmdBOM.Parameters["@user"].Value = username;
@@ -65,5 +66,7 @@ and b.dq_empid = @user order by a.dq_time";
             connection.Close();
             return jl;
         }
+
+
     }
 }

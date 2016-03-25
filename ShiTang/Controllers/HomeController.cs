@@ -15,7 +15,7 @@ namespace ShiTang.Controllers
         public ActionResult Index(string id)
         {
             if (User.Identity.Name == "14546" || User.Identity.Name == "00114546" || User.Identity.Name == "3001377" || User.Identity.Name == "3002769")
-                return RedirectToAction("Index", "Admin", new { name = User.Identity.Name });
+                return RedirectToAction("Index", "Manage", new { name = User.Identity.Name });
             if (string.IsNullOrEmpty(id)) id = DateTime.Now.ToString("yyyyMM");
             var Users = Membership.GetUser();
             var Remains = ShitangService.GetRemains(User.Identity.Name);

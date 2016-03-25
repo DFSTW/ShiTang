@@ -1,51 +1,75 @@
 ﻿<!DOCTYPE html>
-<html lang="zh">
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <title>@ViewBag.Title - 信息中心</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-@*    @Styles.Render("~/Content/css")*@
-    @Styles.Render("~/Content/bootstrap")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta name="renderer" content="webkit">
+    <title>食堂消费查询</title>
+    <link href="~/Content/milligram.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/menu.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-    @* <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("信息中心", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                            <li>@Html.ActionLink("关于", "About", "Home")</li>
-                            <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>*@
-    <div id="body vertical-center">
-       @* @Html.Partial("_LoginPartial")*@
-        @RenderSection("featured", required: false)
-        <section class="content-wrapper main-content clear-fix">
-            @RenderBody()
-        </section>
+    <div class="menu">
+        <ul>
+            <li>@Html.ActionLink("主页", "Index", "Home")</li>
+            <li>@Html.ActionLink("个人消费查询", "Index", "Admin")</li>
+            <li><a href="#">公司消费报表</a>
+                <ul>
+                    <li>@Html.ActionLink("东汽月消费报表", "Index", "MReport")</li>
+                    <li>@Html.ActionLink("东汽实业月消费报表", "SY", "MReport")</li>
+                    <li>@Html.ActionLink("西科月消费报表", "XK", "MReport")</li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">食堂消费报表</a>
+                <ul>
+                    <li>@Html.ActionLink("八角一食堂消费报表", "BY", "MReport")</li>
+                    <li>@Html.ActionLink("八角二食堂度消费报表", "BE", "MReport")</li>
+                    <li>@Html.ActionLink("八角三食堂消费报表", "BS", "MReport")</li>
+                    <li>@Html.ActionLink("八角配餐中心消费报表", "BP", "MReport")</li>
+                    <li>@Html.ActionLink("二分厂食堂消费报表", "EF", "MReport")</li>
+                    <li>@Html.ActionLink("风电食堂消费报表", "FD", "MReport")</li>
+                    <li>@Html.ActionLink("辅机食堂度消费报表", "FJ", "MReport")</li>
+                    <li>@Html.ActionLink("河东食堂消费报表", "HD", "MReport")</li>
+                    <li>@Html.ActionLink("绵竹食堂消费报表", "MZ", "MReport")</li>
+                    <li>@Html.ActionLink("运业食堂消费报表", "YY", "MReport")</li>
+                </ul>
+            </li>
+            <li>@Html.ActionLink("刷卡机消费报表", "PM", "MReport")
+            </li>
+            <div class="clr"></div>
+        </ul>
     </div>
-    <footer>
-        <div class="content-wrapper">
-            <div class="pull-right">
-                <p>&copy; @DateTime.Now.Year - 信息中心</p>
-            </div>
+    <div class="container">
+        @RenderSection("featured", required: false)
+        @RenderBody()
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()" style="color: blue">注销退出</a>
+        }
+        <div>
+            <a><span>信息中心软件组版权所有　©@DateTime.Now.Year</span></a>
         </div>
-    </footer>
-    @Scripts.Render("~/bundles/bootstrapjs")
+    </div>
     @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.menu ul ul').hide();
+
+            $('.menu ul li').hover(function () {
+                $(this)
+                  .find('ul')
+                  .stop(true, true)
+                  .slideDown('fast');
+
+            }, function () {
+                $(this)
+                  .find('ul')
+                  .stop(true, true)
+                  .fadeOut('fast');
+            });
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
