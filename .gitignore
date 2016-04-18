@@ -279,3 +279,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.exe
+*.dll
+ShiTang/W.exe.config
+ShiTang/W.vshost.exe.config
+ShiTang/W.vshost.exe.manifest

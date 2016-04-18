@@ -16,7 +16,9 @@
                 <ul>
                     <li>@Html.ActionLink("东汽月消费报表", "Index", "MReport")</li>
                     <li>@Html.ActionLink("东汽实业月消费报表", "SY", "MReport")</li>
-                    <li>@Html.ActionLink("西科月消费报表", "XK", "MReport")</li>
+                    @* <li>@Html.ActionLink("西科月消费报表", "XK", "MReport")</li>*@
+                    <li>@Html.ActionLink("佳虹实业月消费报表", "JH", "MReport")</li>
+                    <li>@Html.ActionLink("肖恩记月消费报表", "XE", "MReport")</li>
                 </ul>
             </li>
             <li>
@@ -35,6 +37,17 @@
                 </ul>
             </li>
             <li>@Html.ActionLink("刷卡机消费报表", "PM", "MReport")
+            </li>
+            <li><a href="#">白名单管理</a>
+                <ul>
+                    <li>@Html.ActionLink("充值金额设置", "Index", "Charge")</li>
+                    @*   <li>@Html.ActionLink("个人充值消费查询", "BY", "MReport")</li>*@
+                    
+                    <li>@Html.ActionLink("挂失/休假/离职管理", "White", "Charge")</li>
+                   @* <li>@Html.ActionLink("产假管理", "CJ", "Charge")</li>*@
+                    <li>@Html.ActionLink("添加新员工", "NEW", "Charge")</li>
+                   @* <li>@Html.ActionLink("离职注销", "ZX", "Charge")</li>*@
+                </ul>
             </li>
             <div class="clr"></div>
         </ul>

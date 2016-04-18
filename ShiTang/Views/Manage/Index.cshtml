@@ -1,20 +1,47 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
+<h4>故障刷卡机列表</h4>
+<h6>更新于<span id="updateTime"></span></h6>
+<table>
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>IP</th>
+            <th>机号</th>
+            <th>状态</th>
+            <th>位置</th>
+            <th>公司</th>
+        </tr>
+    </thead>
+    <tbody id="posters">
+    </tbody>
+</table>
 
-<h4>食堂消费查询系统</h4>
-        
-       @* <input type="button" id="first" class="submit" value="个人消费记录查询"  />
-        <input type="button" id="second" class="submit" value="消费月度报表"  /><br />*@
 @section scripts{
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#first').click(function () {
-                window.location.href = "@Url.Content("~")" + "Admin/Index/";
-            });
-            $('#second').click(function () {
-                window.location.href = "@Url.Content("~")" + "MReport/Index/";
+            $.ajax({
+                url: "http://172.18.50.156:8123/api/ErrPoster",
+                type: 'GET',
+                dataType: 'json',
+                success: function (da) {
+                    da.forEach(function (data) {
+                        var link = "@Url.Action("PMM", "MReport", new { index = "-1" })";
+                        link = link.replace("-1", data.dq_index) + '&loc=' + data.dq_location;
+                        var x = "</td><td style='color:red;'>"
+                        $('#posters').append("<tr class='added'><td>"
+                           + "<a href='" + link + "'>" + data.dq_name + "</a>" + x + data.dq_ip + x + data.dq_index +
+                          x + '机器故障' + x + data.dq_location + x + data.dq_company
+                +
+                            "</td></tr>");
+                        $('#updateTime').text(data.dq_time);
+                    });
+                },
+                error: function () {
+                    console.log('error');
+                }
             });
         });
     </script>

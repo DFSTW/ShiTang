@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "NEW";
+}
+<h4>添加新员工</h4>
+<div>
+</div>
+@using (Html.BeginForm())
+{
+    <label>胸卡号</label>
+    <input id="id" name="id" type="text" value="@ViewBag.ID"/>
+    <label>姓名</label>
+    <input id="name" name="name" type="text" value="@ViewBag.ID"/>
+    <label>卡ID</label>
+    <input id="cardid" name="cardid" type="text" value="@ViewBag.ID"/>
+    <label>充值金额</label>
+    <input id="charge" name="charge" type="text" value="@ViewBag.ID"/>
+    <input type="submit" class="submit" value="执行" />
+    <table>
+        <thead>
+            <tr>
+                <th>卡号</th>
+                <th>姓名</th>
+                <th>部门</th>
+                <th>状态</th>
+                <th>公司</th>
+                <th>卡号</th>
+                <th>充值金额</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@ViewBag.dq_id</td>
+                <td>@ViewBag.dq_name</td>
+                <td>@ViewBag.dq_depart</td>
+                <td>@ViewBag.dq_state</td>
+                <td>@ViewBag.dq_company</td>
+                <td>@ViewBag.dq_cardid</td>
+                <td>@ViewBag.dq_charge</td>
+            </tr>
+        </tbody>
+    </table>
+}

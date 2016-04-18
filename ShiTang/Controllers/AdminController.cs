@@ -8,6 +8,7 @@ using System.Web.Security;
 
 namespace ShiTang.Controllers
 {
+    [Authorize(Users = "14546, 00114546,3001377,3002769")]
     public class AdminController : Controller
     {
         //
@@ -15,9 +16,6 @@ namespace ShiTang.Controllers
 
         public ActionResult Index(string id, string name)
         {
-            if (!(User.Identity.Name == "14546" || User.Identity.Name == "00114546" || User.Identity.Name == "3001377" || User.Identity.Name == "3002769"))
-                return RedirectToAction("Index", "Home");
-
             if (string.IsNullOrEmpty(id)) id = DateTime.Now.ToString("yyyyMM");
             if (string.IsNullOrEmpty(name)) name = User.Identity.Name;
             var Users = Membership.GetUser(name);

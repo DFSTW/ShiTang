@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model ShiTang.Models.ChargeModel
+<h5>当前设置：金额: @Model.Charge
+    <span>余额清零：@(Model.Reset ? "是" : "否")</span>
+</h5>
+<h6>说明：设置完充值金额后，会在每月1号自动计算与下发白名单</h6>
+@*<div>
+    <label for="charge">充值金额</label>
+    <input id="charge" type="text" placeholder="@ViewBag.Charge" />
+    <label>
+        <input type="checkbox" name="reset" id="reset" value="@ViewBag.Reset"><span class="label-inline">余额清零</span>
+
+    </label>
+    
+</div>*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+                                    
+    @Html.LabelFor(m => m.Charge)
+    @Html.TextBoxFor(m => m.Charge, new { })
+    
+    @Html.CheckBoxFor(m => m.Reset, new { @checked = Model.Reset  })
+    @Html.LabelFor(m => m.Reset, new { @class="label-inline",@style="font-weight: bold;"})
+   <br />
+    
+    <input type="submit" class="submit" value="设置充值金额" />
+                                         
+}

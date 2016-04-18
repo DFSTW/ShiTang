@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<h4>挂失/休假/离职管理</h4>
+<div>
+</div>
+@using (Html.BeginForm())
+{
+    <label>胸卡号</label>
+    <input id="id" name="id" type="text" value="@ViewBag.ID"/>
+    <label>选择</label>
+    <select id="ageRangeField" name="select">
+        <option id="select0" value="0">挂失</option>
+        <option id="select1" value="1">解除挂失</option>
+        <option id="select2" value="2">休产假</option>
+        <option id="select3" value="3">取消产假</option>
+        <option id="select4" value="4">离职(冻结)</option>
+        <option id="select5"  value="5">解除冻结</option>
+    </select>
+    <div id="chargeDiv" style="display:none;">
+        <label>充值金额</label>
+        <input id="charge" name="charge" type="text" value="0" />
+    </div>
+    <input type="submit" class="submit" value="执行" />
+    <table>
+        <thead>
+            <tr>
+                <th>卡号</th>
+                <th>姓名</th>
+                <th>部门</th>
+                <th>状态</th>
+                <th>公司</th>
+                <th>卡号</th>
+                <th>充值金额</th>
+
+            </tr>
+        </thead>
+        <tbody id="report">
+            <tr class='added'>
+                <td>@ViewBag.dq_id</td>
+                <td>@ViewBag.dq_name</td>
+                <td>@ViewBag.dq_depart</td>
+                <td>@ViewBag.dq_state</td>
+                <td>@ViewBag.dq_company</td>
+                <td>@ViewBag.dq_cardid</td>
+                <td>@ViewBag.dq_charge</td>
+            </tr>
+        </tbody>
+    </table>
+}
+<div>@ViewBag.output</div>
+@section scripts{
+
+    <script type="text/javascript">
+        var func = function (e) {
+            $('.added').remove();
+            $.ajax({
+                url: "http://172.18.50.156:8123/api/Employee/" + $('#id').val(),
+                type: 'GET',
+                dataType: 'json',
+                success: function (da) {
+                    da.forEach(function (data, index) {
+                        if (index == 0) {
+                            switch (data.dq_state) {
+                                case '正常':
+                                    $('#select0').show();
+                                    $('#select1').hide();
+                                    $('#select2').show();
+                                    $('#select3').hide();
+                                    $('#select4').show();
+                                    $('#select5').hide();
+                                    $("#ageRangeField").val("0");
+                                    $('#chargeDiv').hide();
+                                    break;
+                                case '挂失':
+                                    $('#select0').hide();
+                                    $('#select1').show();
+                                    $('#select2').hide();
+                                    $('#select3').hide();
+                                    $('#select4').hide();
+                                    $('#select5').hide();
+                                    $("#ageRangeField").val("1");
+                                    $('#chargeDiv').hide();
+                                    break;
+                                case '产假':
+                                    $('#select0').hide();
+                                    $('#select1').hide();
+                                    $('#select2').hide();
+                                    $('#select3').show();
+                                    $('#select4').hide();
+                                    $('#select5').hide();
+                                    $("#ageRangeField").val("3");
+                                    $('#chargeDiv').show();
+                                    break;
+                                case '冻结':
+                                    $('#select0').hide();
+                                    $('#select1').hide();
+                                    $('#select2').hide();
+                                    $('#select3').hide();
+                                    $('#select4').hide();
+                                    $('#select5').show();
+                                    $("#ageRangeField").val("5");
+                                    $('#chargeDiv').show();
+                                    break;
+                                default:
+                                    $('#select0').show();
+                                    $('#select1').show();
+                                    $('#select2').show();
+                                    $('#select3').show();
+                                    $('#select4').show();
+                                    $('#select5').show();
+                                    $('#chargeDiv').hide();
+                            }
+                        }
+                        $('#report').append("<tr class='added'><td>"
+                            + data.dq_id + "</td><td>" + data.dq_name + "</td><td>" + data.dq_depart +
+                            "</td><td>" + data.dq_state + "</td><td>" + data.dq_company + "</td><td>" + data.dq_cardid +
+                            "</td><td>" + data.dq_charge + "</td></tr>");
+                    });
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+        };
+        $(document).ready(function () {
+            $('select').on('change', function () {
+                if (this.value == 3 || this.value == 5) {
+                    $('#chargeDiv').show();
+                } else {
+                    $('#chargeDiv').hide();
+                }
+            });
+            
+            func();
+            $('#id').keyup(func);
+
+        });
+    </script>
+}

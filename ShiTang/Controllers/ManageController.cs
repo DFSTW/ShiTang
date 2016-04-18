@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ShiTang.Controllers
 {
-    [Authorize]
+    [Authorize(Users = "14546, 00114546,3001377,3002769")]
     public class ManageController : Controller
     {
         //

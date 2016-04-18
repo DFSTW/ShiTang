@@ -177,6 +177,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ChargeController.cs" />
+    <Compile Include="Controllers\CompController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MReportController.cs" />
@@ -258,7 +260,11 @@
     <Content Include="Images\6608854332282905024.jpg" />
     <Content Include="Images\6608854332282905023.jpg" />
     <Content Include="Images\btn.png" />
+    <Content Include="Project2.dll" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\echarts-all.js" />
+    <Content Include="Scripts\excellentexport.js" />
+    <Content Include="Scripts\excellentexport.min.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -273,6 +279,10 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="STReadWhiteList.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="W.exe" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -304,12 +314,17 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Admin\Index2.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_Report.cshtml" />
     <Content Include="Views\MReport\Index.cshtml" />
     <Content Include="Views\MReport\PM.cshtml" />
+    <Content Include="Views\Charge\Index.cshtml" />
+    <Content Include="Views\Comp\Index.cshtml" />
+    <Content Include="Views\Charge\White.cshtml" />
+    <Content Include="Views\Charge\CJ.cshtml" />
+    <Content Include="Views\Charge\NEW.cshtml" />
+    <Content Include="Views\Charge\ZX.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -334,7 +349,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>62423</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:2480/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

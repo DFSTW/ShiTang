@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ShiTang.Controllers
 {
+    [Authorize(Users = "14546, 00114546,3001377,3002769")]
     public class MReportController : Controller
     {
         //
@@ -32,6 +33,20 @@ namespace ShiTang.Controllers
             ViewBag.HeaerTitle = "西科食堂消费报表";
             ViewBag.Url = baseUrl + "/api/Comp/";
             ViewBag.Param = "?comp=西科";
+            return View("Index");
+        }
+        public ActionResult JH()
+        {
+            ViewBag.HeaerTitle = "佳虹实业食堂消费报表";
+            ViewBag.Url = baseUrl + "/api/Comp/";
+            ViewBag.Param = "?comp=佳虹实业";
+            return View("Index");
+        }
+        public ActionResult XE()
+        {
+            ViewBag.HeaerTitle = "肖恩记食堂消费报表";
+            ViewBag.Url = baseUrl + "/api/Comp/";
+            ViewBag.Param = "?comp=肖恩记";
             return View("Index");
         }
         public ActionResult BY()

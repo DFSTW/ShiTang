@@ -14,14 +14,18 @@ namespace ShiTang.Controllers
 
         public ActionResult Index(string id)
         {
-            if (User.Identity.Name == "14546" || User.Identity.Name == "00114546" || User.Identity.Name == "3001377" || User.Identity.Name == "3002769")
+            if (User.Identity.Name == "13504" || User.Identity.Name == "00113504"
+                || User.Identity.Name == "14546" || User.Identity.Name == "00114546" 
+                || User.Identity.Name == "3001377" || User.Identity.Name == "3002769")
                 return RedirectToAction("Index", "Manage", new { name = User.Identity.Name });
+            if (User.Identity.Name == "001DQSY" || User.Identity.Name == "001JHSY"
+                || User.Identity.Name == "001XEJ" )
+                return RedirectToAction("Index", "Comp", new { name = User.Identity.Name });
             if (string.IsNullOrEmpty(id)) id = DateTime.Now.ToString("yyyyMM");
             var Users = Membership.GetUser();
             var Remains = ShitangService.GetRemains(User.Identity.Name);
             if (Remains.StartsWith("无此胸卡号") && Users.Comment != null)
             {
-
                 ViewBag.Remains = ShitangService.GetRemains(Users.Comment);
                 return View(ShitangService.GetDetails(Users.Comment, id));
             }
